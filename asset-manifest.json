@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Weather/static/css/main.b663f647.css",
+    "main.js": "/Weather/static/js/main.10f9ad3d.js",
+    "static/media/cloud.png": "/Weather/static/media/cloud.0d0ef089188a1227d136.png",
+    "static/media/Montserrat-Regular.ttf": "/Weather/static/media/Montserrat-Regular.2a2d37bf7680d86811db.ttf",
+    "static/media/precipitation.svg": "/Weather/static/media/precipitation.6c31dc8d6fd8c5e04bb9.svg",
+    "static/media/termometr.svg": "/Weather/static/media/termometr.18b10b0030133461c0c5.svg",
+    "static/media/rain.svg": "/Weather/static/media/rain.6036f34826ec1b0c4595.svg",
+    "static/media/wind.svg": "/Weather/static/media/wind.c378966a4a388ab301a1.svg",
+    "static/media/pressure.svg": "/Weather/static/media/pressure.68d4c1a0f1c0f8e80e41.svg",
+    "index.html": "/Weather/index.html",
+    "main.b663f647.css.map": "/Weather/static/css/main.b663f647.css.map",
+    "main.10f9ad3d.js.map": "/Weather/static/js/main.10f9ad3d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b663f647.css",
+    "static/js/main.10f9ad3d.js"
+  ]
+}
