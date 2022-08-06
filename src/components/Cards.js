@@ -1,30 +1,31 @@
-import React, {useContext,useState} from "react";
+import React, {useContext} from "react";
 import ThemeContext from "../context/context";
-import DataContext from "../context/data-context";
+import { WeatherContext } from "../context/context";
+
+
 
 
 function Cards() {
-    const {weather} = useContext(DataContext);
-    const {theme} = useContext(ThemeContext);
-   
-    function sliceWeatherDay(weatherDay) {
+    const [state, dispatch] = useContext(WeatherContext);
+    const {theme} = useContext(ThemeContext); 
+
+    const sliceWeatherFiveDay = (weather) => {
         const size = 8; 
         const daySlice = [];
-        for (let i = 0; i <Math.ceil(weatherDay.length/size); i++){
-            daySlice[i] = weatherDay.slice((i*size), (i*size) + size);
-        }
+            for (let i = 0; i <Math.ceil(weather.length/size); i++){
+                daySlice[i] = weather.slice((i*size), (i*size) + size);
+            }
+
        return daySlice
     }
 
-    const [ indexDay, setIndexDay ] = useState(0);
-    const [active,setActive] = useState(false)
+
     const openTab = e => {
-        setIndexDay(e.target.dataset.index)
-        setActive(true)
+        dispatch({type:"SWITCH_TAB", payload:e.target.dataset.index})     
     };
-    
+
     function rendDay(daySlice) {
-      daySlice = sliceWeatherDay(weather.dataWth.list)
+      daySlice = sliceWeatherFiveDay(state.dataWeather.list)
         const itemSliceDay = daySlice.map((el,i) => 
             
            
@@ -44,7 +45,7 @@ function Cards() {
     }
 
     function dayTab(daytabSlice) {
-        daytabSlice = sliceWeatherDay(weather.dataWth.list)[indexDay];
+        daytabSlice = sliceWeatherFiveDay(state.dataWeather.list)[state.indexDay];
         const itemsSliceWeek = daytabSlice.map((el) => 
             <div className={`tabContainer`} key={el.dt} >        
                 <div className={"dayTab dayCardAct theme_" + theme}>{el.dt_txt.slice(10,16)}</div>
@@ -60,19 +61,23 @@ function Cards() {
  return itemsSliceWeek
 };
 
-    if(!weather.loading === false || weather.dataWth.length === 0 || weather.code === "404" ) return ''
+    if(state.dataWeather.cod === "404" || state.dataWeather.length === 0 ) return ''
   
     return (
-        <div className="cards">  
+        
+      <div className="cards">  
         <div className={`descriptionPanel theme_` +theme}>Погода на пять дней</div>         
             <div className={"card theme_" + theme}>
                 {rendDay()}
             </div>
-            
+            <div className={`descriptionPanel theme_` +theme}>Погода на день</div>   
         <div className="mainTabContainer"> 
+ 
                 {dayTab()}
             </div>
         </div>
+  
+       
     )
 }
 export default Cards

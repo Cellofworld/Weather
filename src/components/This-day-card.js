@@ -1,35 +1,28 @@
-import React, {useContext,useEffect} from "react";
+import React, {useContext} from "react";
 import ThemeContext from "../context/context";
-import DataContext from "../context/data-context";
+import { WeatherContext } from "../context/context";
 
 function CardsDay() {
 const date = new Date();
-const hours = date.getHours();
-const minutes = date.getMinutes(0);
+const hours = date.getHours(0);
+const minutes = date.getMinutes(0,0);
 const {theme} = useContext(ThemeContext);
-const {weather} = useContext(DataContext);
+const [state] = useContext(WeatherContext);
 
-useEffect(()  => {
-    document.body.classList.add('theme_' + theme);
-    return () => {
-        document.body.classList.remove('theme_' + theme);
-    };
-});
-
-if(!weather.loading === false || weather.dataWth.length === 0 || weather.code === "404" ) return ''
+console.log(state.dataWeather.cod)
+if(state.dataWeather.cod === "404" || state.dataWeather.length === 0 ) return ''
     return (
-     
       <div className={"cardsDay theme_" + theme}>
             <div className="mainInfo">
             <div className="titleDay"> 
-            <div className="degrees">{Math.round(weather.dataWth.list[0].main.temp)}°</div>
+            <div className="degrees">{Math.round(state.dataWeather.list[0].main.temp)}°</div>
             <div className={"day theme_" + theme}>Сегодня</div>
             <div className="time mainCard">Время: {hours}:{minutes}</div>
-            <div className="city mainCard">Город: {weather.dataWth.city.name}</div>
+            <div className="city mainCard">Город: {state.dataWeather.city.name}</div>
         </div>
             </div>
             <img className="weatherIcon" 
-            src={`http://openweathermap.org/img/wn/${weather.dataWth.list[3].weather[0].icon}@2x.png`}
+            src={`http://openweathermap.org/img/wn/${state.dataWeather.list[3].weather[0].icon}@2x.png`}
             alt="iconWeather">
             </img>
         </div>

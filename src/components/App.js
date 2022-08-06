@@ -1,15 +1,15 @@
 import '../style/App.css'
-import CardsDay from './This-day-card';
 import Header from './Header-bar';
 import DayInfo from './This-day-info-card';
 import Cards from './Cards';
-
+import { useContext } from 'react';
+import ThemeContext from "../context/context";
 
 function App() {
+  const {theme} = useContext(ThemeContext); 
   return (
-    <div className="App">
+    <div className={`App theme_` + theme}>
       <Header />
-      <CardsDay />
       <DayInfo />
       <Cards />
     </div>
@@ -17,3 +17,4 @@ function App() {
 }
 
 export default App;
+
